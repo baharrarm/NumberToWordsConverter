@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/server/">
+    <Project Path="server/NumberToWordsConverter.Api/NumberToWordsConverter.Api.csproj" />
+    <Project Path="server/NumberToWordsConverter.Application/NumberToWordsConverter.Application.csproj" />
+    <Project Path="server/NumberToWordsConverter.Tests/NumberToWordsConverter.Tests.csproj" />
+  </Folder>
+</Solution>
