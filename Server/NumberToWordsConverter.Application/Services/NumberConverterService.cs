@@ -9,15 +9,8 @@ namespace NumberToWordsConverter.Application.Services
         /// </summary>
         public string GenerateNumberWordsCompleteString(decimal number)
         {
+            // Validate input number before use.
             return "";
-        }
-
-        /// <summary>
-        ///     Gets a decimal number and checks to see if it can be converted  
-        /// </summary>
-        private bool IsNumberValid(decimal number)
-        {
-            return false;
         }
 
         /// <summary>
