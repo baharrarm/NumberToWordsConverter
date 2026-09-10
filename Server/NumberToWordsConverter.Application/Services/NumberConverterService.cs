@@ -1,16 +1,25 @@
+using NumberToWordsConverter.Application.Models;
 using NumberToWordsConverter.Application.Services.Interfaces;
+using NumberToWordsConverter.Application.Validators;
 
 namespace NumberToWordsConverter.Application.Services
 {
     public class NumberConverterService : INumberConverterService
     {
+        private readonly NumberValidator _validator = new NumberValidator();
         /// <summary>
         ///     Gets a decimal number and converts it into words with currency details and combines them into a complete result in Uppercase.  
         /// </summary>
-        public string GenerateNumberWordsCompleteString(decimal number)
+        public ConversionResult GenerateNumberWordsCompleteString(decimal number)
         {
             // Validate input number before use.
-            return "";
+            var error = _validator.Validate(number);
+            if (!string.IsNullOrEmpty(error))
+            {
+                return new ConversionResult(false, "", error);
+            }
+
+            return new ConversionResult(true, "NumberWordsCompleteString", "");
         }
 
         /// <summary>

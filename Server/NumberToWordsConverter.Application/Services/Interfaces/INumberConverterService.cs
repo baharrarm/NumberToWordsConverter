@@ -1,8 +1,10 @@
+using NumberToWordsConverter.Application.Models;
+
 namespace NumberToWordsConverter.Application.Services.Interfaces
 {
     public interface INumberConverterService
     {
-        string GenerateNumberWordsCompleteString(decimal number);
+        ConversionResult GenerateNumberWordsCompleteString(decimal number);
         
     }
 }

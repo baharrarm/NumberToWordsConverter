@@ -11,8 +11,6 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<INumberConverterService, NumberConverterService>();
 
-builder.Services.AddScoped<NumberValidator>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
