@@ -24,3 +24,5 @@ app.MapNumberConverterEndpoints();
 
 app.Run();
 
+public partial class Program { }
+
