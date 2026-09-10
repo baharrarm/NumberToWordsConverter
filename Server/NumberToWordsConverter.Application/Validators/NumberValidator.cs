@@ -4,10 +4,17 @@ public class NumberValidator
 {
     /// <summary>
     ///     Gets a decimal number and checks to see if it can be converted.
-    ///     If not, it returns either the error message or null.  
+    ///     If not, it returns the error message.
+    ///     If yes, it returns an empty string.
     /// </summary>
-    public string Validate(decimal amount)
+    public string Validate(decimal number)
     {
-        return "";
+        decimal fraction = number - decimal.Truncate(number);
+
+        if (number <= 0) return "The number must be greater than zero.";
+        else if (decimal.Truncate(number) > (decimal) UInt64.MaxValue) return "The number is too big.";
+        else if (!decimal.IsInteger(fraction * 100)) return "The fraction must not be more than 2 digits.";
+        else
+            return "";
     }
 }
