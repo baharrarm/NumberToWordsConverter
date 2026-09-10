@@ -8,7 +8,8 @@ namespace NumberToWordsConverter.Application.Services
     {
         private readonly NumberValidator _validator = new NumberValidator();
         /// <summary>
-        ///     Gets a decimal number and converts it into words with currency details and combines them into a complete result in Uppercase.  
+        ///     Gets a decimal number and converts it into words with currency details and combines them into a complete result in Uppercase. 
+        ///     Returns a failed result with error message if validation fails. 
         /// </summary>
         public ConversionResult GenerateNumberWordsCompleteString(decimal number)
         {
