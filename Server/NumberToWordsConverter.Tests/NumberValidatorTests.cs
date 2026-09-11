@@ -18,12 +18,15 @@ public class NumberValidatorTests
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void ReturnError_WhenNumberIsZero()
+    [Theory]
+    [InlineData("0", "The number must be greater than zero.")]
+    [InlineData(".00", "The number must be greater than zero.")]
+    [InlineData("0.0", "The number must be greater than zero.")]
+    public void ReturnError_WhenNumberIsZero(string number, string expected)
     {
-        var validator = new NumberValidator();
-        var error = validator.Validate(0m);
-        Assert.Equal("The number must be greater than zero.", error);
+        decimal num = Convert.ToDecimal(number, CultureInfo.InvariantCulture);
+        string actual = new NumberValidator().Validate(num);
+        Assert.Equal(expected, actual);
     }
 
     [Fact]
