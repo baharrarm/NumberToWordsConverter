@@ -51,6 +51,7 @@ public class NumberConverterEndpointTests : IClassFixture<WebApplicationFactory<
     [InlineData("{\"number\": \"1,234.56\"}", "Enter a valid number with up to two decimal places.")]
     [InlineData("{\"number\": \"1.234\"}", "Enter a valid number with up to two decimal places.")]
     [InlineData("{\"number\": \"1e3\"}", "Enter a valid number with up to two decimal places.")]
+    [InlineData("{\"number\": \"23.\"}", "Enter a valid number with up to two decimal places.")]
     public async Task ReturnsBadRequest_WhenNumberFormatIsInvalid(string json, string expected)
     {
         using var content = new StringContent(json, Encoding.UTF8, "application/json");
