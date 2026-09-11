@@ -51,7 +51,7 @@ function App() {
       setResult(words)
 
     } catch {
-      setError("Could not connect to the API. Check that it is running.")
+      setError("Could not connect to the server. Please try again later.")
     } finally {
       setIsLoading(false)
     }
