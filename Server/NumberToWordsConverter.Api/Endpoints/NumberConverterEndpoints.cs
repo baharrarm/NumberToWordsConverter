@@ -7,6 +7,8 @@ namespace NumberToWordsConverter.Api.Endpoints;
 
 public static class NumberConverterEndpoints
 {
+    // Allow decimal notation, reject scientific notation and allow trailing zeros.
+    // Reject grouping separators and nonzero digits after 2-digit cents.
     private static readonly Regex NumberRegex = new(@"\A-?(?:[0-9]+(?:\.[0-9]{1,2}0*)?|\.[0-9]{1,2}0*)\z");
     public static IEndpointRouteBuilder MapNumberConverterEndpoints(this IEndpointRouteBuilder app)
     {
@@ -25,10 +27,10 @@ public static class NumberConverterEndpoints
                 return Results.BadRequest(new {error = "The number is too big."});
 
             var result = numberConverterService.GenerateNumberWordsCompleteString(number);
+
             if (!result.IsSuccess)
-            {
                 return Results.BadRequest(new {error = result.Error});
-            }
+
             return Results.Ok(result.Words);
         });
         

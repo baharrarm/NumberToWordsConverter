@@ -5,6 +5,8 @@ namespace NumberToWordsConverter.Tests;
 
 public class NumberValidatorTests
 {
+    private readonly NumberValidator _validator = new NumberValidator();
+
     [Theory]
     [InlineData("18446744073709551615.99", "")]
     [InlineData("0.01", "")]
@@ -13,8 +15,8 @@ public class NumberValidatorTests
     [InlineData("46", "")]
     public void Succeed_WhenNumberIsValid(string number, string expected)
     {
-        decimal num = Convert.ToDecimal(number, CultureInfo.InvariantCulture); //to stay consistent on different computers
-        string actual = new NumberValidator().Validate(num);
+        decimal num = Convert.ToDecimal(number, CultureInfo.InvariantCulture); // To stay consistent on different computers
+        string actual = _validator.Validate(num);
         Assert.Equal(expected, actual);
     }
 
@@ -24,25 +26,29 @@ public class NumberValidatorTests
     [InlineData("0.0", "The number must be greater than zero.")]
     public void ReturnError_WhenNumberIsZero(string number, string expected)
     {
-        decimal num = Convert.ToDecimal(number, CultureInfo.InvariantCulture);
-        string actual = new NumberValidator().Validate(num);
+        decimal num = Convert.ToDecimal(number, CultureInfo.InvariantCulture); // To stay consistent on different computers
+        string actual = _validator.Validate(num);
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void ReturnError_WhenNumberIsTooBig()
+    [Theory]
+    [InlineData("18446744073709551616", "The number is too big.")]
+    [InlineData("79228162514264337593543950335", "The number is too big.")] // Decimal.MaxValue
+    public void ReturnError_WhenNumberIsTooBig(string number, string expected)
     {
-        var validator = new NumberValidator();
-        var error = validator.Validate(18446744073709551616m);
-        Assert.Equal("The number is too big.", error);
+        decimal num = Convert.ToDecimal(number, CultureInfo.InvariantCulture); // To stay consistent on different computers
+        var error = _validator.Validate(num);
+        Assert.Equal(expected, error);
     }
 
-    [Fact]
-    public void ReturnError_WhenNumberIsNegative()
+    [Theory]
+    [InlineData("-1.10", "The number must be greater than zero.")]
+    [InlineData("-79228162514264337593543950335", "The number must be greater than zero.")] // Decimal.MinValue
+    public void ReturnError_WhenNumberIsNegative(string number, string expected)
     {
-        var validator = new NumberValidator();
-        var error = validator.Validate(-1.10m);
-        Assert.Equal("The number must be greater than zero.", error);
+        decimal num = Convert.ToDecimal(number, CultureInfo.InvariantCulture); // To stay consistent on different computers
+        var error = _validator.Validate(num);
+        Assert.Equal(expected, error);
     }
 
 
@@ -53,7 +59,7 @@ public class NumberValidatorTests
     public void ReturnError_WhenFractionMoreThan2Digits(string number, string expected)
     {
         decimal num = Convert.ToDecimal(number, CultureInfo.InvariantCulture);
-        string actual = new NumberValidator().Validate(num);
+        string actual = _validator.Validate(num);
         Assert.Equal(expected, actual);
     }
 }
