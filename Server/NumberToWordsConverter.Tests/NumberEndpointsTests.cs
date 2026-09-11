@@ -5,14 +5,12 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace NumberToWordsConverter.Tests;
 
-public class NumberConverterEndpointTests
-    : IClassFixture<WebApplicationFactory<Program>>
+public class NumberConverterEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly HttpClient _client;
     private record ErrorResponse(string Error);
 
-    public NumberConverterEndpointTests(
-        WebApplicationFactory<Program> factory)
+    public NumberConverterEndpointTests(WebApplicationFactory<Program> factory)
     {
         _client = factory.CreateClient(
             new WebApplicationFactoryClientOptions
@@ -85,10 +83,10 @@ public class NumberConverterEndpointTests
     [InlineData("{\"number\": \".25\"}", "TWENTY-FIVE CENTS")]
     [InlineData("{\"number\": \"1.2300\"}", "ONE DOLLAR AND TWENTY-THREE CENTS")]
     [InlineData("{\"number\": \"18446744073709551615.99\"}", 
-        "EIGHTEEN QUINTILLION FOUR HUNDRED AND FORTY-SIX QUADRILLION " +
-        "SEVEN HUNDRED AND FORTY-FOUR TRILLION SEVENTY-THREE BILLION " +
-        "SEVEN HUNDRED AND NINE MILLION FIVE HUNDRED AND FIFTY-ONE " +
-        "THOUSAND SIX HUNDRED AND FIFTEEN DOLLARS AND NINETY-NINE CENTS")]
+        "EIGHTEEN QUINTILLION AND FOUR HUNDRED AND FORTY-SIX QUADRILLION " +
+        "AND SEVEN HUNDRED AND FORTY-FOUR TRILLION AND SEVENTY-THREE BILLION " +
+        "AND SEVEN HUNDRED AND NINE MILLION AND FIVE HUNDRED AND FIFTY-ONE THOUSAND " +
+        "AND SIX HUNDRED AND FIFTEEN DOLLARS AND NINETY-NINE CENTS")]
     public async Task ReturnsWords_WhenNumberIsValid(string json, string expected)
     {
         using var content = new StringContent(json, Encoding.UTF8, "application/json");

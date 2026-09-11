@@ -1,8 +1,8 @@
-namespace NumberToWordsConverter.Api.Models
+namespace NumberToWordsConverter.Api.Models;
+
+public class ConvertNumberRequest
 {
-    public class ConvertNumberRequest
-    {
-        public string? Number { get; set; }
-    }
+    // Accept string to accept numbers beyond JavaScript's exact numeric range.
+    public string? Number { get; set; }
 }
 

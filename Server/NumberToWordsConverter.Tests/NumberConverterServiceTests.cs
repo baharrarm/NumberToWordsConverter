@@ -3,17 +3,19 @@ using NumberToWordsConverter.Application.Services;
 
 namespace NumberToWordsConverter.Tests;
 
-public class NumberConverterServiceTest
+public class NumberConverterServiceTests
 {
-    NumberConverterService _converterService = new NumberConverterService();
+    private readonly NumberConverterService _converterService = new NumberConverterService();
 
     [Theory]
     [InlineData("18446744073709551615.15", 
-        "EIGHTEEN QUINTILLION FOUR HUNDRED AND FORTY-SIX QUADRILLION " +
-        "SEVEN HUNDRED AND FORTY-FOUR TRILLION SEVENTY-THREE BILLION " +
-        "SEVEN HUNDRED AND NINE MILLION FIVE HUNDRED AND FIFTY-ONE " +
-        "THOUSAND SIX HUNDRED AND FIFTEEN DOLLARS AND FIFTEEN CENTS")]
-    [InlineData("6543212.34", "SIX MILLION FIVE HUNDRED AND FORTY-THREE THOUSAND TWO HUNDRED AND TWELVE DOLLARS AND THIRTY-FOUR CENTS")]
+        "EIGHTEEN QUINTILLION AND FOUR HUNDRED AND FORTY-SIX QUADRILLION " +
+        "AND SEVEN HUNDRED AND FORTY-FOUR TRILLION AND SEVENTY-THREE BILLION " +
+        "AND SEVEN HUNDRED AND NINE MILLION AND FIVE HUNDRED AND FIFTY-ONE THOUSAND " +
+        "AND SIX HUNDRED AND FIFTEEN DOLLARS AND FIFTEEN CENTS")]
+    [InlineData("6543212.34", 
+        "SIX MILLION AND FIVE HUNDRED AND FORTY-THREE THOUSAND " +
+        "AND TWO HUNDRED AND TWELVE DOLLARS AND THIRTY-FOUR CENTS")]
     [InlineData("100.30", "ONE HUNDRED DOLLARS AND THIRTY CENTS")]
     [InlineData("145.09", "ONE HUNDRED AND FORTY-FIVE DOLLARS AND NINE CENTS")]
     [InlineData("1.2300", "ONE DOLLAR AND TWENTY-THREE CENTS")]
@@ -26,9 +28,11 @@ public class NumberConverterServiceTest
     [InlineData("100", "ONE HUNDRED DOLLARS")]
     [InlineData("1000", "ONE THOUSAND DOLLARS")]
     [InlineData("5000001", "FIVE MILLION AND ONE DOLLARS")]
-    public void ReturnWordResult_ConvertNumberToWordsInCurrency_WhenNumberIsValid(string number, string expected)
+    [InlineData("100050000", "ONE HUNDRED MILLION AND FIFTY THOUSAND DOLLARS")]
+    [InlineData("80000000000", "EIGHTY BILLION DOLLARS")]
+    public void ReturnWordResult_GenerateNumberWordsCompleteString_WhenNumberIsValid(string number, string expected)
     {
-        decimal num = Convert.ToDecimal(number, CultureInfo.InvariantCulture); //to stay consistent on different computers
+        decimal num = Convert.ToDecimal(number, CultureInfo.InvariantCulture); // To stay consistent on different computers
         var actual = _converterService.GenerateNumberWordsCompleteString(num);
         Assert.True(actual.IsSuccess);
         Assert.Equal(expected, actual.Words);
@@ -44,9 +48,9 @@ public class NumberConverterServiceTest
     [InlineData("-1.12", "The number must be greater than zero.")]
     [InlineData(".00012", "The fraction must not be more than 2 digits.")]
     [InlineData("1.456", "The fraction must not be more than 2 digits.")]
-    public void ReturnError_ConvertNumberToWordsInCurrency_WhenNumberIsNotValid(string number, string expected)
+    public void ReturnError_GenerateNumberWordsCompleteString_WhenNumberIsNotValid(string number, string expected)
     {
-        decimal num = Convert.ToDecimal(number, CultureInfo.InvariantCulture); //to stay consistent on different computers
+        decimal num = Convert.ToDecimal(number, CultureInfo.InvariantCulture); // To stay consistent on different computers
         var actual = _converterService.GenerateNumberWordsCompleteString(num);
         Assert.False(actual.IsSuccess);
         Assert.Equal(expected, actual.Error);

@@ -1,10 +1,9 @@
 using NumberToWordsConverter.Application.Models;
 
-namespace NumberToWordsConverter.Application.Services.Interfaces
+namespace NumberToWordsConverter.Application.Services.Interfaces;
+
+public interface INumberConverterService
 {
-    public interface INumberConverterService
-    {
-        ConversionResult GenerateNumberWordsCompleteString(decimal number);
-        
-    }
+    ConversionResult GenerateNumberWordsCompleteString(decimal number);
+    
 }
