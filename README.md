@@ -40,10 +40,10 @@ npm: 11.13.0
 3. For working with the program, the frontend and backend need to be running at the same time. 
 
 First open up a terminal in the IDE and execute the backend in the repository root with the below command. The API listens at 'https://localhost:5001'.
-"dotnet run --project Server/NumberToWordsConverter.Api --launch-profile https"
+  `dotnet run --project Server/NumberToWordsConverter.Api --launch-profile https`
 
 Then keep this terminal running and open a new one for executing the frontend. From the root directory, head to Client/. There, run the command 'npm install' first to install the frontend dependencies and then run the React app with the below command:
-"npm run dev"
+  `npm run dev`
 
 If it doesn't automatically open a browser with the React app running on it, open a browser and head to 'http://localhost:3000'
 
@@ -96,12 +96,12 @@ Malformed JSON or an incorrect JSON property type also returns `400`.
 ## Building the app
 
 To build the backend from the repository root execute this command:
-dotnet build Server/NumberToWordsConverter.Api/NumberToWordsConverter.Api.csproj
+  `dotnet build Server/NumberToWordsConverter.Api/NumberToWordsConverter.Api.csproj`
 
 To build the frontend, go to Client/ and after installing its dependencies (with npm install), execute this:
-npm run build
+  `npm run build`
 
-The frontend build is generated in `Client/dist/`. 
+The frontend build is generated in Client/dist/. 
 
 The instructions above host the application locally. To deploy elsewhere, the API URL and CORS configuration need to be updated.
 
