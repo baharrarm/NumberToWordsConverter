@@ -52,14 +52,17 @@ public class NumberConverterService : INumberConverterService
         List<int> splittedNumber = SplitByNotations(number);
         List<string> words = new List<string>();
         
-        bool needsAnd = true;
+        bool needsAnd;
 
         for (int i = 0; i < splittedNumber.Count(); i++)
         {
             if (splittedNumber[i] != 0)
             {
-                if (i == splittedNumber.Count() - 1)
-                    needsAnd = false;
+                needsAnd = false;
+                if (i == 0 && splittedNumber[i] < 100 && splittedNumber.Count > 1)
+                {
+                    needsAnd = true;
+                }
                 
                 words.InsertRange(0, Map3DigitNumberToWords(splittedNumber[i], i, needsAnd));   
             }
@@ -91,22 +94,19 @@ public class NumberConverterService : INumberConverterService
     {
         var threeDigitNumberWord = new List<string>();
 
-        // Add "And" before each nonzero group except the last group (highest notation).
-        if (needsAnd) 
-            threeDigitNumberWord.Add("And");
-        
         if (number / 100 > 0)
         {
             threeDigitNumberWord.Add(NumberWords.UnitsMap[(number / 100) - 1]);
             threeDigitNumberWord.Add(NumberWords.NotationsMap[0]);
+            needsAnd = true;
             number %= 100;
-            
-            if (number > 0)
-                threeDigitNumberWord.Add("And");
         }
 
         if (number > 0)
-        {                
+        {           
+            if (needsAnd) 
+                threeDigitNumberWord.Add("And");
+            
             if (number < 20) 
             {
                 threeDigitNumberWord.Add(NumberWords.UnitsMap[number - 1]);
