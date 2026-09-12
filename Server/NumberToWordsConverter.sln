@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberToWordsConverter.Api", "NumberToWordsConverter.Api\NumberToWordsConverter.Api.csproj", "{6B375513-4B30-430E-B804-8419ACCF7BDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberToWordsConverter.Application", "NumberToWordsConverter.Application\NumberToWordsConverter.Application.csproj", "{156B894B-F7E3-4D8F-AD58-80A5B4D70999}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberToWordsConverter.Tests", "NumberToWordsConverter.Tests\NumberToWordsConverter.Tests.csproj", "{68045494-FD8E-417F-9693-4B16A08D9783}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B375513-4B30-430E-B804-8419ACCF7BDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B375513-4B30-430E-B804-8419ACCF7BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B375513-4B30-430E-B804-8419ACCF7BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B375513-4B30-430E-B804-8419ACCF7BDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{156B894B-F7E3-4D8F-AD58-80A5B4D70999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{156B894B-F7E3-4D8F-AD58-80A5B4D70999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{156B894B-F7E3-4D8F-AD58-80A5B4D70999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{156B894B-F7E3-4D8F-AD58-80A5B4D70999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68045494-FD8E-417F-9693-4B16A08D9783}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68045494-FD8E-417F-9693-4B16A08D9783}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68045494-FD8E-417F-9693-4B16A08D9783}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68045494-FD8E-417F-9693-4B16A08D9783}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
