@@ -38,7 +38,7 @@ docs is the directory containing the design document and test plan.
 - Node.js: 26.1.0
 - npm: 11.13.0
 
-2. Clone the project onto your computer and open NumberToWordsConverter.sln via an IDE like Visual Studio/Rider or open the main folder 
+2. Clone the project onto your computer and open NumberToWordsConverter.sln in Server/ via an IDE like Visual Studio/Rider or open the main folder 
 (the root that is containing the Client and the Server folders) in a code editor like Visual Studio Code.
 
 
@@ -55,6 +55,9 @@ There, run these commands in order to first install the frontend dependencies an
 `npm run dev`
 
 If it doesn't automatically open a browser with the React app running on it, open a browser and head to 'http://localhost:3000'
+
+If you have trouble installing dependencies or running the frontend, check your Node.js and npm versions.
+Using the same versions listed in this document might help resolve compatibility issues.
 
 The frontend uses port 3000 and stops if that port is already occupied. The API's CORS configuration allows this frontend origin.
 
