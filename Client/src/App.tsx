@@ -18,8 +18,22 @@ function App() {
       setError("Enter a valid number with up to two decimal places.")
       return
     }
-    if (parseFloat(input) <= 0) {
+    if (input.startsWith("-") || !/[1-9]/.test(input)) {
       setError("The number must be greater than zero.")
+      return
+    }
+
+    // Format the text as a JSON number.
+    const parts = input.split(".")
+    const integerPart = parts[0].replace(/^0+/, "") || "0"
+    let formattedNumber = integerPart
+    if (parts.length === 2) {
+      formattedNumber += "." + parts[1]
+    }
+
+    const maxIntegerPart = "18446744073709551615"
+    if (integerPart.length > maxIntegerPart.length || ( integerPart.length === maxIntegerPart.length && integerPart > maxIntegerPart)) {
+      setError("The number is too big.")
       return
     }
 
@@ -28,19 +42,26 @@ function App() {
       const response = await fetch('https://localhost:5001/api/convert', {
         method: 'POST',
         headers: {'Content-Type': 'application/json',},
-        body: JSON.stringify({ number: input }),
+        body: `{"number":${formattedNumber}}`,
       })
 
       if (!response.ok) {
         if (response.status === 400) {
-          const body = await response.json()
-          if (body.error !== null && body.error !== undefined) {
-            setError(body.error)
-          } 
-          else {
-            setError("The number could not be converted.")
+          let message = "The number could not be converted."
+
+          try {
+            const body = await response.json()
+
+            if (typeof body?.error === "string") {
+              message = body.error
+            }
+          } catch {
+            // Some invalid requests return an empty or non-JSON response.
+            // In that case nothing happens and we fall back on the default error message;
           }
-        } 
+          
+          setError(message)
+        }
         else {
           setError("Server could not complete conversion. Please try again.")
         }
